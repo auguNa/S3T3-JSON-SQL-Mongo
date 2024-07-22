@@ -1,9 +1,9 @@
-package product_management;
+package model;
 
-public class Decoration extends Product{
-    private Material material;
+public class Decoration extends Product {
+    private Material material;;
 
-    public Decoration(double price, Material material) {
+    public Decoration(Material material, double price ) {
         super(price);
         this.material = material;
     }
@@ -16,9 +16,8 @@ public class Decoration extends Product{
     @Override
     public String toString() {
         return "Decoration{" +
-                "id=" + getId() +
+                "material='" + material + '\'' +
                 ", price=" + getPrice() +
-                ", material=" + material +
                 '}';
     }
 }

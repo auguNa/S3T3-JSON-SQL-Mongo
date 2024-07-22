@@ -1,4 +1,4 @@
-package product_management;
+package model;
 
 public enum Material {
     WOOD,

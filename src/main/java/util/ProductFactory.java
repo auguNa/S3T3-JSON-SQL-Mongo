@@ -1,6 +1,6 @@
-package factory;
+package util;
 
-import product_management.*;
+import model.*;
 
 public class ProductFactory {
     private static ProductFactory instance;
@@ -15,17 +15,17 @@ public class ProductFactory {
         return instance;
     }
 
-    public Product createProduct(String type, double price, String attribute) {
+    public static Product createProduct(String type, double price, String attribute) {
         switch (type.toLowerCase()) {
             case "tree":
-                return new Tree(price, Double.parseDouble(attribute));
+                return new Tree(Double.parseDouble(attribute), price );
             case "flower":
-                return new Flower(price, attribute);
+                return new Flower(attribute, price);
             case "decoration":
                 Material material = Material.valueOf(attribute.toUpperCase());
-                return new Decoration(price, material);
+                return new Decoration(material, price);
             default:
-                throw new IllegalArgumentException("Invalid product type");
+                throw new IllegalArgumentException("Unknown product type: " + type);
         }
     }
 }

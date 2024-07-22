@@ -1,24 +1,28 @@
-package product_management;
+package model;
+
 
 public class Flower extends Product {
     private String color;
 
-    public Flower(double price, String color) {
+    public Flower(String color, double price) {
         super(price);
         this.color = color;
     }
 
-    @Override
-    public String getAttribute() {
+    public String getColor() {
         return color;
     }
 
     @Override
     public String toString() {
         return "Flower{" +
-                "id=" + getId() +
+                "color='" + color + '\'' +
                 ", price=" + getPrice() +
-                ", color=" + color +
                 '}';
+    }
+
+    @Override
+    public String getAttribute() {
+        return color;
     }
 }
