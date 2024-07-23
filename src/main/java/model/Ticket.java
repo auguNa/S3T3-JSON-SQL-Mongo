@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ticket {
-    private List<Integer> productIds = new ArrayList<>();
+    private List<String> productDetails = new ArrayList<>();
     private double totalPrice;
 
-    public void addProduct(int productId) {
-        productIds.add(productId);
-        // Assuming the price is fetched from the database based on product ID
-        // totalPrice += fetchedPrice;
-    }
+    public void addProduct(String type, String attribute, int quantity) {
+        productDetails.add(quantity + " x " + type + " (" + attribute + ")");
+            }
 
-    public List<Integer> getProductIds() {
-        return productIds;
+    public List<String> getProductDetails() {
+        return productDetails;
     }
 
     public double getTotalPrice() {
@@ -24,8 +22,9 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" +
-                "productIds=" + productIds +
+                "productDetails=" + productDetails +
                 ", totalPrice=" + totalPrice +
                 '}';
     }
 }
+

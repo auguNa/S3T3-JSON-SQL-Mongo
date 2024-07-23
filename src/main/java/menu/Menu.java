@@ -8,9 +8,9 @@ public class Menu {
     private FloristService floristService = FloristService.getInstance();
     private StockManagementService stockManagementService = new StockManagementService();
     private SalesManagementService salesManagementService = new SalesManagementService();
-
+    Scanner sc = new Scanner(System.in);
     public void start() {
-        Scanner sc = new Scanner(System.in);
+
         int option;
         do {
             System.out.println("1.- Create Florist");
@@ -22,7 +22,7 @@ public class Menu {
             sc.nextLine();
             switch (option) {
                 case 1:
-                    createFlorist(sc);
+                    createFlorist();
                     break;
                 case 2:
                     stockManagementService.manageStock();
@@ -39,7 +39,8 @@ public class Menu {
         } while (option != 0);
     }
 
-    private void createFlorist(Scanner sc) {
+    private void createFlorist() {
+
         System.out.println("Enter florist name:");
         String name = sc.nextLine();
         floristService.createFlorist(name);

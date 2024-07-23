@@ -10,7 +10,7 @@ public class TicketDAO {
     public void addTicket(Ticket ticket) {
         String query = "INSERT INTO tickets (product_ids, total_price) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, ticket.getProductIds().toString());
+            stmt.setString(1, ticket.getProductDetails().toString());
             stmt.setDouble(2, ticket.getTotalPrice());
             stmt.executeUpdate();
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package service;
 
+import dao.ProductDAO;
 import dao.TicketDAO;
 import model.*;
 
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class SalesManagementService {
     Scanner sc = new Scanner(System.in);
     private TicketDAO ticketDAO = new TicketDAO();
+    private ProductDAO productDAO = new ProductDAO();
 
     public void manageSales() {
         int option;
@@ -41,17 +43,46 @@ public class SalesManagementService {
 
     private void createPurchaseTicket() {
         Ticket ticket = new Ticket();
+        while (true) {
+            System.out.println("Enter the type of product to purchase (tree/flower/decoration) or 'done' to finish:");
+            String type = sc.nextLine();
+            if (type.equalsIgnoreCase("done")) {
+                break;
+            }
 
-        System.out.println("Enter the number of products in the purchase:");
-        int numProducts = sc.nextInt();
-        sc.nextLine();
+            String attribute = "";
+            switch (type.toLowerCase()) {
+                case "tree":
+                    System.out.println("Enter the height of the tree:");
+                    attribute = sc.nextLine();
+                    break;
+                case "flower":
+                    System.out.println("Enter the color of the flower:");
+                    attribute = sc.nextLine();
+                    break;
+                case "decoration":
+                    System.out.println("Enter the material of the decoration (WOOD/PLASTIC):");
+                    attribute = sc.nextLine().toUpperCase();
+                    break;
+                default:
+                    System.out.println("Invalid product type.");
+                    continue;
+            }
 
-        for (int i = 0; i < numProducts; i++) {
-            System.out.println("Enter product ID:");
-            int productId = sc.nextInt();
+            System.out.println("Enter the quantity to purchase:");
+            int quantity = sc.nextInt();
             sc.nextLine();
-            ticket.addProduct(productId);
+
+            boolean isAvailable = productDAO.checkAndRemoveStock(type, attribute, quantity);
+            if (isAvailable) {
+                ticket.addProduct(type, attribute, quantity);
+            } else {
+                System.out.println("Not enough stock available for the requested product.");
+            }
         }
+
+        ticketDAO.addTicket(ticket);
+        System.out.println("Purchase ticket created: " + ticket);
 
         ticketDAO.addTicket(ticket);
         System.out.println("Purchase ticket created: " + ticket);
@@ -65,3 +96,4 @@ public class SalesManagementService {
         ticketDAO.printTotalMoneyEarned();
     }
 }
+

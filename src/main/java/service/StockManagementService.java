@@ -69,10 +69,13 @@ public class StockManagementService {
         double height = sc.nextDouble();
         System.out.println("Enter tree price:");
         double price = sc.nextDouble();
+
+        System.out.println("Enter quantity:");
+        int quantity = sc.nextInt();
         sc.nextLine();
 
         Tree tree = (Tree) ProductFactory.createProduct("Tree", price, String.valueOf(height));
-        productDAO.addProduct(tree);
+        productDAO.addProduct(tree, quantity);
         System.out.println("Tree added: " + tree);
     }
 
@@ -81,10 +84,12 @@ public class StockManagementService {
         String color = sc.nextLine();
         System.out.println("Enter flower price:");
         double price = sc.nextDouble();
+        System.out.println("Enter quantity:");
+        int quantity = sc.nextInt();
         sc.nextLine();
 
         Product flower = (Flower) ProductFactory.createProduct("flower", price, String.valueOf(color));
-        productDAO.addProduct(flower);
+        productDAO.addProduct(flower, quantity);
         System.out.println("Flower added: " + flower);
     }
 
@@ -93,11 +98,12 @@ public class StockManagementService {
         double price = sc.nextDouble();
         System.out.println("Enter decoration material (Wood/Plastic):");
         String material = sc.nextLine();
-
+        System.out.println("Enter quantity:");
+        int quantity = sc.nextInt();
+        sc.nextLine();
         Product decoration = ProductFactory.createProduct("decoration", price, material);
 
-        //Decoration decoration = (Decoration) ProductFactory.createProduct("Decoration", material, price);
-        productDAO.addProduct(decoration);
+        productDAO.addProduct(decoration, quantity);
         System.out.println("Decoration added: " + decoration);
     }
 
